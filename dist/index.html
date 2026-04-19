@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HUSTI Elite</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg?v=4" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Syne:wght@600;800&family=Space+Grotesk:wght@500;700&family=Bruno+Ace&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=4" />
+  </head>
+  <body>
+    <!-- Fluid background graphics -->
+    <div id="fluid-layer">
+      <div class="fluid-bg fluid-purple"></div>
+      <div class="fluid-bg fluid-lime"></div>
+    </div>
+    
+    <!-- Image Wallpaper Layer -->
+    <div id="wallpaper-layer"></div>
+
+    <nav class="top-nav">
+      <div class="brand" id="brand-logo" style="cursor: pointer; position: relative;">
+        <img src="./icon.svg?v=4" alt="HUSTI Logo" style="width: 72px; height: 72px; margin-right: 14px; border-radius: 16px; box-shadow: 0 12px 24px rgba(0,0,0,0.6);">
+        <span class="husti-text">HUSTI</span>
+        <div id="bg-dropdown" class="premium-bg-dropdown">
+          <div class="bg-option" data-bg="bg/anime-moon-landscape.jpg">Moon Landscape</div>
+          <div class="bg-option" data-bg="bg/anime-moon-landscape (1).jpg">Moon Alt</div>
+          <div class="bg-option" data-bg="bg/black-cat-riding-turtle-ocean.jpg">Cosmic Cat</div>
+          <div class="bg-option" data-bg="fluid">Original Fluid Orbs</div>
+          <div class="bg-slider-wrap" style="padding: 1rem 1.2rem; border-top: 1px solid rgba(255,255,255,0.15); margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-body); font-weight: 700; text-transform: uppercase;">Image Opacity</span>
+              <span id="bg-opacity-val" style="color: var(--accent-white); font-size: 0.85rem; font-family: var(--font-body); font-weight: 700;">60%</span>
+            </div>
+            <input type="range" id="bg-opacity" min="0" max="1" step="0.05" value="0.6" style="width: 100%; cursor: pointer;">
+          </div>
+        </div>
+      </div>
+      <div class="nav-controls">
+        <button class="nav-pill active" data-view="view-calendar">Calendar</button>
+        <button class="nav-pill" data-view="view-analytics">Analytics</button>
+        <button class="nav-pill" data-view="view-settings">Settings</button>
+      </div>
+      <button id="today-button" class="btn-brutal btn-outline">Today</button>
+    </nav>
+
+    <main class="viewport-stage">
+      <!-- CALENDAR VIEW -->
+      <section id="view-calendar" class="master-view active">
+        <header class="calendar-header">
+          <button id="prev-year" class="brutal-icon">&laquo;</button>
+          <button id="prev-month" class="brutal-icon">&larr;</button>
+          <div class="title-container">
+            <h1 id="month-label" class="brutal-heading">Month 2026</h1>
+          </div>
+          <button id="next-month" class="brutal-icon">&rarr;</button>
+          <button id="next-year" class="brutal-icon">&raquo;</button>
+        </header>
+
+        <div class="calendar-container">
+          <div class="weekday-header" id="weekday-row"></div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS VIEW -->
+      <section id="view-analytics" class="master-view">
+        <header class="calendar-header" style="margin-bottom: 1rem;">
+          <h1 class="brutal-heading accent-orange">STATISTICS</h1>
+          <div style="display: flex; gap: 1rem; align-items: center; background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 100px; border: var(--border-thin);">
+            <button id="ana-prev-month" class="brutal-icon" style="width: 40px; height: 40px; font-size: 1.2rem;">&larr;</button>
+            <span id="ana-month-label" style="font-family: var(--font-heading); font-weight: 700; min-width: 120px; text-align: center; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase;">Month 2026</span>
+            <button id="ana-next-month" class="brutal-icon" style="width: 40px; height: 40px; font-size: 1.2rem;">&rarr;</button>
+          </div>
+        </header>
+        <div class="analytics-grid">
+          <div class="stat-block box-purple">
+             <span class="stat-label">Current Bankroll</span>
+             <strong id="current-bankroll" class="stat-value">₹0</strong>
+          </div>
+          <div class="stat-block box-lime">
+             <span class="stat-label">All-Time Net</span>
+             <strong id="overall-net" class="stat-value">₹0</strong>
+          </div>
+          <div class="stat-block box-red">
+             <span class="stat-label">Month Net</span>
+             <strong id="month-net" class="stat-value">₹0</strong>
+             <small id="month-breakdown">0 active days</small>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Week Net</span>
+             <strong id="week-net" class="stat-value">₹0</strong>
+             <small id="week-breakdown">0 active sessions</small>
+          </div>
+          <div class="stat-block box-dark span-2">
+             <span class="stat-label">Best Day</span>
+             <strong id="best-day" class="stat-value">₹0</strong>
+             <small id="best-day-label" class="accent-lime">N/A</small>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Top Site</span>
+             <strong id="best-site" class="stat-value-sub accent-purple">N/A</strong>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Top Game</span>
+             <strong id="best-game" class="stat-value-sub accent-lime">N/A</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS VIEW -->
+      <section id="view-settings" class="master-view">
+        <h1 class="brutal-heading accent-lime">SYSTEM</h1>
+        <div class="settings-grid">
+           <div class="settings-card brutal-box">
+             <h3>Bankroll Base</h3>
+             <form id="bankroll-form" class="flex-form">
+               <input id="starting-bankroll" type="number" step="0.01" placeholder="Initial Bankroll (INR)" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-primary">Save</button>
+             </form>
+           </div>
+           <div class="settings-card brutal-box">
+             <h3>Manage Tags</h3>
+             <form id="site-form" class="flex-form mb-2">
+               <input id="site-name" type="text" placeholder="Add Site" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-secondary">+</button>
+             </form>
+             <div id="site-list" class="tag-list mb-4"></div>
+             
+             <form id="game-form" class="flex-form mb-2">
+               <input id="game-name" type="text" placeholder="Add Game" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-secondary">+</button>
+             </form>
+             <div id="game-list" class="tag-list"></div>
+           </div>
+           <div class="settings-card brutal-box">
+             <h3>Data Vault</h3>
+             <div class="flex-form">
+               <button id="export-button" class="btn-brutal btn-outline">Export Backup</button>
+               <button id="import-button" class="btn-brutal btn-outline">Import Backup</button>
+               <input id="import-file" type="file" accept="application/json" hidden />
+             </div>
+             <p id="status-text" class="status-indicator">Ready.</p>
+             <div class="cloud-panel">
+               <div class="cloud-panel-head">
+                 <h4>Cloud Sync</h4>
+                 <span id="cloud-mode-badge" class="status-pill" data-tone="neutral">Local Only</span>
+               </div>
+               <p id="cloud-user" class="cloud-copy">Add Supabase config to enable cloud sync and remote backups.</p>
+               <form id="auth-form" class="stack-form">
+                 <input id="auth-email" type="email" placeholder="you@example.com" class="brutal-input" autocomplete="email" />
+                 <button id="auth-submit-button" type="submit" class="btn-brutal btn-primary">Email Magic Link</button>
+               </form>
+               <div class="flex-form">
+                 <button id="sync-now-button" type="button" class="btn-brutal btn-outline">Sync Now</button>
+                 <button id="sign-out-button" type="button" class="btn-brutal btn-outline">Sign Out</button>
+               </div>
+               <p id="cloud-status-text" class="status-indicator">Cloud disabled.</p>
+             </div>
+           </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- PREMIUM INFORMATION CARD (MODAL) -->
+    <div id="info-modal" class="modal-overlay">
+      <div class="info-card">
+        <button id="close-modal" class="modal-close-btn">&times;</button>
+        
+        <div class="card-header">
+           <h2 id="modal-date-heading" class="modal-heading">Date</h2>
+           <span id="session-count" class="pill-badge">0</span>
+        </div>
+
+        <div class="insight-split">
+          <div class="insight-box box-lime">
+            <span class="insight-label">Net Profit</span>
+            <strong id="modal-net" class="insight-hero">₹0</strong>
+          </div>
+          <div class="insight-sub-split">
+            <div class="sub-box">
+              <span class="insight-label">Won</span>
+              <strong id="modal-won" class="insight-val accent-lime">₹0</strong>
+            </div>
+            <div class="sub-box">
+              <span class="insight-label">Lost</span>
+              <strong id="modal-lost" class="insight-val accent-red">₹0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-body-scroll">
+          <div class="entry-section" id="record-action-section">
+            <h3 class="section-title">Record Action</h3>
+            <form id="session-form" class="brutal-form">
+              <input id="session-label" type="text" placeholder="Description..." class="brutal-input" />
+              <div class="input-grid">
+                 <!-- Custom Dropdown Site -->
+                 <div class="custom-select-wrapper" id="site-wrapper">
+                   <div class="custom-select" id="site-select">
+                     <span class="cs-label">Select Site...</span> <span class="cs-arrow">▼</span>
+                   </div>
+                   <div class="custom-select-options" id="site-options"></div>
+                   <input type="hidden" id="session-site" required>
+                 </div>
+                 
+                 <!-- Custom Dropdown Game -->
+                 <div class="custom-select-wrapper" id="game-wrapper">
+                   <div class="custom-select" id="game-select">
+                     <span class="cs-label">Select Game...</span> <span class="cs-arrow">▼</span>
+                   </div>
+                   <div class="custom-select-options" id="game-options"></div>
+                   <input type="hidden" id="session-game" required>
+                 </div>
+
+                 <input id="session-won" type="number" step="0.01" placeholder="Won ₹" class="brutal-input text-lime" required />
+                 <input id="session-lost" type="number" step="0.01" placeholder="Lost ₹" class="brutal-input text-red" required />
+              </div>
+              <button type="submit" class="btn-brutal btn-primary w-100">LOG ENTRY</button>
+            </form>
+          </div>
+
+          <div class="entry-section">
+             <h3 class="section-title">Journal</h3>
+             <form id="notes-form" class="brutal-form">
+               <textarea id="daily-notes" rows="3" placeholder="End of day thoughts..." class="brutal-input"></textarea>
+               <button type="submit" class="btn-brutal btn-secondary w-100">SAVE</button>
+             </form>
+          </div>
+
+          <div class="entry-section">
+             <h3 class="section-title">Chronicle</h3>
+             <div id="session-list" class="session-scroll-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="tag-template">
+      <div class="brutal-tag">
+        <span></span>
+        <button type="button">&times;</button>
+      </div>
+    </template>
+
+    <script type="module" src="./script.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('PWA Service Worker Registered', reg.scope))
+            .catch(err => console.error('PWA SW Registration Failed', err));
+        });
+      }
+    </script>
+  </body>
+</html>

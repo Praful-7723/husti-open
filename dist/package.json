@@ -1,0 +1,10 @@
+{
+  "name": "husti-elite",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "python3 -m http.server 4173"
+  }
+}

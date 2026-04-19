@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Ultra-lightweight Chrome/Gold Gradient -->
+    <linearGradient id="goldPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="20%" stop-color="#cc9900"/>
+      <stop offset="40%" stop-color="#ffea75"/>
+      <stop offset="70%" stop-color="#b8860b"/>
+      <stop offset="100%" stop-color="#daa520"/>
+    </linearGradient>
+
+    <!-- Deep Carbon Black Gradient -->
+    <linearGradient id="carbonBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111111"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+
+    <!-- Static Sharp Highlight -->
+    <linearGradient id="sharpShine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+    </linearGradient>
+  </defs>
+
+  <!-- Massive flat carbon base -->
+  <rect width="512" height="512" rx="110" fill="url(#carbonBase)" stroke="#ffd700" stroke-width="2"/>
+
+  <g transform="translate(0, -10)">
+    <!-- Thick Gold H Architecture -->
+    <!-- Left Pillar -->
+    <path d="M130 110 L190 110 L210 266 L190 422 L130 422 L150 266 Z" fill="url(#goldPlate)"/>
+    <!-- Left Pillar Highlights -->
+    <path d="M130 110 L145 130 L145 402 L130 422 Z" fill="#ffffff" opacity="0.3"/>
+    
+    <!-- Right Pillar -->
+    <path d="M392 110 L332 110 L312 266 L332 422 L392 422 L372 266 Z" fill="url(#goldPlate)"/>
+    <!-- Right Pillar Highlights -->
+    <path d="M392 110 L377 130 L377 402 L392 422 Z" fill="#ffffff" opacity="0.3"/>
+
+    <!-- Center Bridge -->
+    <polygon points="190,240 332,240 312,282 210,282" fill="url(#sharpShine)"/>
+  </g>
+
+  <!-- Extreme lightweight SVG animation (No Filters) -->
+  <g opacity="0.6">
+    <polygon points="-100,0 0,0 -200,600 -300,600" fill="#ffffff">
+      <animate attributeName="transform" type="translate" from="-200" to="1200" dur="4s" repeatCount="indefinite" />
+    </polygon>
+  </g>
+</svg>
