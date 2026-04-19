@@ -179,12 +179,21 @@ function applyBackground(choice) {
   if (choice === DEFAULT_BG) {
     el.fluidLayer.style.display = "block";
     el.wallpaperLayer.style.backgroundImage = "none";
+    el.wallpaperLayer.innerHTML = "";
     el.wallpaperLayer.style.opacity = 0;
     return;
   }
 
   el.fluidLayer.style.display = "none";
-  el.wallpaperLayer.style.backgroundImage = `url("${choice}")`;
+  
+  if (choice.endsWith(".mp4")) {
+    el.wallpaperLayer.style.backgroundImage = "none";
+    el.wallpaperLayer.innerHTML = `<video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));"><source src="${choice}" type="video/mp4"></video>`;
+  } else {
+    el.wallpaperLayer.innerHTML = "";
+    el.wallpaperLayer.style.backgroundImage = `url("${choice}")`;
+  }
+  
   el.wallpaperLayer.style.opacity = state.bgOpacity;
   el.bgOpacity.value = String(state.bgOpacity);
   el.bgOpacityVal.textContent = `${Math.round(state.bgOpacity * 100)}%`;
@@ -859,14 +868,15 @@ function updateAnalytics() {
 
     totalNet += totals.net;
 
-    entry.sessions.forEach((session) => {
-      const net = session.won - session.lost;
-      siteMap.set(session.site, (siteMap.get(session.site) || 0) + net);
-      gameMap.set(session.game, (gameMap.get(session.game) || 0) + net);
-    });
-
     if (current.getFullYear() === visibleMonth.year && current.getMonth() === visibleMonth.month) {
       monthNet += totals.net;
+      
+      entry.sessions.forEach((session) => {
+        const net = session.won - session.lost;
+        siteMap.set(session.site, (siteMap.get(session.site) || 0) + net);
+        gameMap.set(session.game, (gameMap.get(session.game) || 0) + net);
+      });
+
       if (entry.sessions.length) {
         activeMonthDays += 1;
       }

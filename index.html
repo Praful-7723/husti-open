@@ -91,6 +91,7 @@
         <img src="./icon.svg?v=4" alt="HUSTI Logo" style="width: 72px; height: 72px; margin-right: 14px; border-radius: 16px; box-shadow: 0 12px 24px rgba(0,0,0,0.6);">
         <span class="husti-text">HUSTI</span>
         <div id="bg-dropdown" class="premium-bg-dropdown">
+          <div class="bg-option" data-bg="bg/cliffside-tropical-cafe-moewalls-com.mp4">Cliffside Cafe Live</div>
           <div class="bg-option" data-bg="bg/anime-moon-landscape.jpg">Moon Landscape</div>
           <div class="bg-option" data-bg="bg/anime-moon-landscape (1).jpg">Moon Alt</div>
           <div class="bg-option" data-bg="bg/black-cat-riding-turtle-ocean.jpg">Cosmic Cat</div>
@@ -147,12 +148,12 @@
 
       <!-- ANALYTICS VIEW -->
       <section id="view-analytics" class="master-view">
-        <header class="calendar-header" style="margin-bottom: 1rem;">
+        <header class="calendar-header" style="margin-bottom: 1rem; flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
           <h1 class="brutal-heading accent-orange">STATISTICS</h1>
-          <div style="display: flex; gap: 1rem; align-items: center; background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 100px; border: var(--border-thin);">
-            <button id="ana-prev-month" class="brutal-icon" style="width: 40px; height: 40px; font-size: 1.2rem;">&larr;</button>
-            <span id="ana-month-label" style="font-family: var(--font-heading); font-weight: 700; min-width: 120px; text-align: center; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase;">Month 2026</span>
-            <button id="ana-next-month" class="brutal-icon" style="width: 40px; height: 40px; font-size: 1.2rem;">&rarr;</button>
+          <div style="display: flex; gap: 0.5rem; justify-content: space-between; align-items: center; background: var(--bg-surface); padding: 0.5rem 0.8rem; border-radius: 100px; border: var(--border-thin); width: 100%; max-width: 350px;">
+            <button id="ana-prev-month" class="brutal-icon" style="width: 40px; height: 40px; flex-shrink: 0; font-size: 1.2rem;">&larr;</button>
+            <span id="ana-month-label" style="font-family: var(--font-heading); font-weight: 700; width: 100%; text-align: center; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase;">Month 2026</span>
+            <button id="ana-next-month" class="brutal-icon" style="width: 40px; height: 40px; flex-shrink: 0; font-size: 1.2rem;">&rarr;</button>
           </div>
         </header>
         <div class="analytics-grid">
