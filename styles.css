@@ -381,6 +381,29 @@ small { font-family: var(--font-body); font-size: 0.9rem; margin-top: 8px; opaci
 /* Today Block Highlight */
 .today-block { border: 2px solid var(--accent-lime) !important; box-shadow: 0 0 15px rgba(204,255,0,0.3); }
 
+/* Premium Missed Day Highlight */
+.day-missed {
+  border: 1px solid rgba(255, 60, 60, 0.8) !important;
+  background: linear-gradient(135deg, rgba(230, 20, 20, 0.8), rgba(150, 0, 0, 0.95)) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center; justify-content: center; position: relative;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+}
+.day-missed .date-number { opacity: 0.9; position: absolute; top:4px; left:4px; font-size: 0.8rem; font-weight: bold;}
+.missed-word {
+  font-family: 'Bruno Ace', cursive;
+  font-weight: normal;
+  font-size: 0.85rem;
+  color: #ffffff;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+}
+
 /* === SUPABASE AUTH OVERLAY === */
 .auth-layer {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -494,6 +517,34 @@ small { font-family: var(--font-body); font-size: 0.9rem; margin-top: 8px; opaci
 .premium-loader-spinner { width: 34px; height: 34px; position:relative; }
 .premium-loader-spinner::before { content:""; position:absolute; inset:0; border-radius:50%; border:3px solid transparent; border-top-color:#111; animation:spin 1s linear infinite; }
 
+/* Premium Streak & Today Buttons */
+.premium-streak {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, rgba(255,58,32,0.15), rgba(255,0,0,0.05));
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,58,32,0.3);
+  box-shadow: inset 0 0 10px rgba(255,58,32,0.2), 0 4px 10px rgba(0,0,0,0.4);
+  letter-spacing: 1px;
+}
+.premium-today-btn {
+  background: linear-gradient(135deg, rgba(204,255,0,0.15), rgba(150,200,0,0.05));
+  border: 1px solid rgba(204,255,0,0.3);
+  color: var(--accent-lime);
+  border-radius: 12px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 800; letter-spacing: 1px; font-size: 0.8rem;
+  box-shadow: inset 0 0 10px rgba(204,255,0,0.1), 0 4px 10px rgba(0,0,0,0.4);
+  backdrop-filter: blur(5px); transition: all 0.2s ease;
+}
+.premium-today-btn:hover { background: rgba(204,255,0,0.2); transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+
 
 /* ================================================================
    ADAPTIVE RESPONSIVE ENGINE — True Mobile-First Reflow
@@ -524,22 +575,45 @@ small { font-family: var(--font-body); font-size: 0.9rem; margin-top: 8px; opaci
 @media (max-width: 700px) {
   body { overflow-y: auto; overflow-x: hidden; }
 
-  /* Nav: stack vertically, relative for today button */
+  /* Nav: elegantly align elements for strict bounds */
   .top-nav {
     position: relative;
-    flex-direction: column; align-items: stretch;
-    padding: 0.6rem 0.8rem; gap: 0.4rem;
+    flex-wrap: wrap; flex-direction: row; align-items: center; justify-content: space-between;
+    padding: 0.8rem 1rem; gap: 0.8rem;
   }
-  .top-nav > .brand { justify-content: center; }
-  .top-nav > .nav-controls { width: 100%; justify-content: center; }
-  .top-nav > div:last-child { justify-content: center; }
+  .top-nav > .brand { justify-content: flex-start; }
+  .top-nav > div:last-child { justify-content: flex-end; }
+  .top-nav > .nav-controls { width: 100%; justify-content: center; order: 3; margin-top: 0.2rem; }
 
   #boot-loader { transform: scale(0.65); transform-origin: center center; }
 
-  .brand img { width: 72px !important; height: 72px !important; margin-right: 12px !important; border-radius: 18px !important; box-shadow: 0 10px 24px rgba(0,0,0,0.5) !important; }
-  .brand .husti-text { font-size: 2.5rem !important; letter-spacing: 3px !important; line-height: 1.1; display: inline-block;}
+  .brand img { width: 50px !important; height: 50px !important; margin-right: 12px !important; border-radius: 0 !important; box-shadow: none !important; }
+  .brand .husti-text { font-size: 2.2rem !important; letter-spacing: 2px !important; line-height: 1.1; display: inline-block;}
   .husti-text { font-size: 1.6rem; letter-spacing: 1px; }
   .nav-pill { padding: 0.45rem 0.8rem; font-size: 0.75rem; letter-spacing: 0.06em; }
+
+  /* Calendar Actions strict mobile vertical stack */
+  .calendar-sub-header { flex-direction: column !important; gap: 0.5rem !important; margin-bottom: 0.8rem !important; align-items: stretch !important; }
+  .premium-streak { width: 100%; justify-content: center; padding: 0.6rem; }
+
+  /* Today button explicit pinning */
+  .mobile-abs-top-right {
+    position: absolute !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    z-index: 50 !important;
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Mobile Missed Seal Vertical Alignment */
+  .day-missed .missed-word {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0px;
+    padding: 0.4rem 0.2rem;
+    font-size: 0.65rem;
+  }
 
   /* Viewport: switch from absolute to flow layout */
   .viewport-stage { flex: none; position: relative; min-height: calc(100vh - 130px); }

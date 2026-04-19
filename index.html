@@ -105,27 +105,38 @@
           <div id="dropdown-logout" class="bg-option" style="display:none; color: var(--accent-orange); justify-content: center; margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 10px 10px;">Secure Logout</div>
         </div>
       </div>
-      <div class="nav-controls">
-        <button class="nav-pill active" data-view="view-calendar">Calendar</button>
-        <button class="nav-pill" data-view="view-analytics">Analytics</button>
-        <button class="nav-pill" data-view="view-settings">Settings</button>
       </div>
-      <div style="display:flex; gap:0.5rem; align-items:center;">
-        <button id="today-button" class="btn-brutal btn-outline">Today</button>
+      <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="today-button" class="btn-brutal premium-today-btn mobile-abs-top-right">TODAY</button>
+        <div class="nav-controls">
+          <button class="nav-pill active" data-view="view-calendar">Calendar</button>
+          <button class="nav-pill" data-view="view-analytics">Analytics</button>
+          <button class="nav-pill" data-view="view-settings">Settings</button>
+        </div>
+      </div>
       </div>
     </nav>
 
     <main class="viewport-stage">
       <!-- CALENDAR VIEW -->
       <section id="view-calendar" class="master-view active">
-        <header class="calendar-header">
-          <button id="prev-year" class="brutal-icon">&laquo;</button>
-          <button id="prev-month" class="brutal-icon">&larr;</button>
-          <div class="title-container">
-            <h1 id="month-label" class="brutal-heading">Month 2026</h1>
+        <header class="calendar-header" style="flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center; width: 100%;">
+            <button id="prev-year" class="brutal-icon">&laquo;</button>
+            <button id="prev-month" class="brutal-icon">&larr;</button>
+            <div class="title-container">
+              <h1 id="month-label" class="brutal-heading">Month 2026</h1>
+            </div>
+            <button id="next-month" class="brutal-icon">&rarr;</button>
+            <button id="next-year" class="brutal-icon">&raquo;</button>
           </div>
-          <button id="next-month" class="brutal-icon">&rarr;</button>
-          <button id="next-year" class="brutal-icon">&raquo;</button>
+          
+          <div class="calendar-sub-header" style="display: flex; justify-content: center; align-items: stretch; gap: 1rem; width: 100%; margin-top: 0.2rem;">
+            <div id="streak-indicator" class="premium-streak">
+              <span style="font-size:1.1rem; filter: drop-shadow(0 0 8px rgba(255,58,32,0.8));">🔥</span>
+              <span id="streak-count">0 DAYS</span>
+            </div>
+          </div>
         </header>
 
         <div class="calendar-container">

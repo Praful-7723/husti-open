@@ -668,6 +668,43 @@ function updateAll() {
 
   el.startingBankroll.value = state.startBankroll || "";
   updateAnalytics();
+  updateStreaks();
+}
+
+function updateStreaks() {
+  const dates = Object.keys(state.entries)
+    .filter(k => state.entries[k] && state.entries[k].sessions && state.entries[k].sessions.length > 0)
+    .sort();
+  
+  let currentStreak = 0;
+  if (!dates.length) {
+    document.getElementById('streak-count').textContent = '0 Days';
+    return;
+  }
+  
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const todayKeyStr = formatDateKey(today);
+  const yesterdayKeyStr = formatDateKey(yesterday);
+
+  const latestStr = dates[dates.length - 1];
+  
+  if (latestStr === todayKeyStr || latestStr === yesterdayKeyStr) {
+    currentStreak = 1;
+    for (let i = dates.length - 1; i > 0; i--) {
+      const d1 = new Date(dates[i-1]);
+      const d2 = new Date(dates[i]);
+      const diff = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+      if (diff === 1) {
+        currentStreak++;
+      } else {
+        break;
+      }
+    }
+  }
+  
+  document.getElementById('streak-count').textContent = currentStreak === 1 ? '1 Day' : currentStreak + ' Days';
 }
 
 function shiftMonth(offset) {
@@ -767,9 +804,12 @@ function renderCalendar() {
     }
     if (entry && entry.sessions.length) {
       classes += totals.net >= 0 ? " day-pos" : " day-neg";
+    } else if (dateKey < todayKey && current.getMonth() === visibleMonth.month) {
+      classes += " day-missed";
     }
 
     let inner = `<span class="date-number">${current.getDate()}</span>`;
+    if (classes.includes("day-missed")) inner += `<div class="day-stats" style="margin:auto"><span class="missed-word">REST</span></div>`;
     if (dateKey === todayKey) {
       inner += '<div class="today-marker"></div>';
       classes += " today-block";
