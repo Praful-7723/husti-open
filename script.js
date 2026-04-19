@@ -452,18 +452,16 @@ async function initCloud() {
   cloud.enabled = true;
   setCloudStatus("Supabase ready. Sign in to enable cloud sync.");
 
-  // Cinematic initial load delay! Make sure they see the boot-loader before revealing app or login
-  await new Promise(resolve => setTimeout(resolve, 800));
-
   const { data, error } = await cloud.client.auth.getSession();
   if (error) {
     handleCloudError(error);
     return;
   }
 
-  await applySession(data.session);
+  await applySession(data.session, true);
+  
   cloud.client.auth.onAuthStateChange((_event, session) => {
-    void applySession(session);
+    void applySession(session, false);
   });
 
   window.addEventListener("online", () => {
@@ -473,11 +471,14 @@ async function initCloud() {
   });
 }
 
-async function applySession(session) {
+async function applySession(session, isInitialLoad = false) {
   cloud.user = session?.user || null;
-  updateCloudUi();
 
   if (!cloud.user) {
+    if (isInitialLoad) {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+    updateCloudUi();
     if (cloud.enabled) {
       setCloudStatus("Signed out. Working in local mode.");
     }
@@ -485,7 +486,17 @@ async function applySession(session) {
   }
 
   setCloudStatus("Signed in. Checking cloud data...");
-  await syncWithCloud();
+  
+  if (isInitialLoad) {
+    await Promise.all([
+      syncWithCloud(),
+      new Promise(resolve => setTimeout(resolve, 7500))
+    ]);
+    updateCloudUi();
+  } else {
+    await syncWithCloud();
+    updateCloudUi();
+  }
 }
 
 async function syncWithCloud({ manual = false } = {}) {

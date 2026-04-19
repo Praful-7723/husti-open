@@ -11,8 +11,8 @@
     <link rel="icon" href="./icon.svg?v=4" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Syne:wght@600;800&family=Space+Grotesk:wght@500;700&family=Bruno+Ace&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Outfit:wght@300;500;700;900&family=Syne:wght@600;800&family=Space+Grotesk:wght@500;700&family=Bruno+Ace&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=12" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
@@ -20,9 +20,33 @@
     <!-- Supabase Auth Overlay -->
     <div id="auth-overlay" class="auth-layer">
       <!-- Boot Loading Screen -->
-      <div id="boot-loader" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem;">
-        <img src="./icon.svg" style="width:80px; filter: drop-shadow(0 0 20px rgba(204,255,0,0.5));">
-        <div class="husti-pulse"></div>
+      <div id="boot-loader" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem;">
+        <div class="husti-svg-container">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="120" height="120" class="premium-svg-logo">
+            <defs>
+              <linearGradient id="goldPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffd700"/><stop offset="20%" stop-color="#cc9900"/><stop offset="40%" stop-color="#ffea75"/><stop offset="70%" stop-color="#b8860b"/><stop offset="100%" stop-color="#daa520"/>
+              </linearGradient>
+              <linearGradient id="carbonBase" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#111111"/><stop offset="100%" stop-color="#000000"/>
+              </linearGradient>
+              <linearGradient id="sharpShine" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.8)" /><stop offset="100%" stop-color="rgba(255,255,255,0)" />
+              </linearGradient>
+            </defs>
+            <rect class="svg-anim-base" width="512" height="512" rx="110" fill="url(#carbonBase)" stroke="#ffd700" stroke-width="2"/>
+            <g transform="translate(0, -10)">
+              <path class="svg-anim-p1" d="M130 110 L190 110 L210 266 L190 422 L130 422 L150 266 Z" fill="url(#goldPlate)"/>
+              <path class="svg-anim-h1" d="M130 110 L145 130 L145 402 L130 422 Z" fill="#ffffff" opacity="0.3"/>
+              <path class="svg-anim-p2" d="M392 110 L332 110 L312 266 L332 422 L392 422 L372 266 Z" fill="url(#goldPlate)"/>
+              <path class="svg-anim-h2" d="M392 110 L377 130 L377 402 L392 422 Z" fill="#ffffff" opacity="0.3"/>
+              <polygon class="svg-anim-b" points="190,240 332,240 312,282 210,282" fill="url(#sharpShine)"/>
+            </g>
+          </svg>
+        </div>
+        <div class="husti-flashy-text">
+          <span>H</span><span>U</span><span>S</span><span>T</span><span>I</span>
+        </div>
       </div>
 
       <div class="auth-card" id="auth-card-block" style="display:none;">
@@ -46,8 +70,8 @@
             <button type="button" id="auth-login" class="btn-brutal btn-primary w-100" style="background:var(--accent-lime); color:#000;">Login</button>
           </div>
           <div id="auth-status" style="margin-top:1rem; text-align:center; color:var(--text-dim); font-size:0.9rem;"></div>
-          <div id="auth-loading" style="display:none; text-align:center; margin-top: 1rem;">
-             <div class="husti-pulse"></div>
+          <div id="auth-loading" style="display:none; position:relative; width:44px; height:44px; margin: 1rem auto 0 auto;">
+             <div class="premium-loader-spinner small" style="position:absolute; top:0; left:0; width:100%; height:100%;"></div>
           </div>
         </form>
       </div>
@@ -285,7 +309,7 @@
       </div>
     </template>
 
-    <script type="module" src="./script.js?v=7"></script>
+    <script type="module" src="./script.js?v=12"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
