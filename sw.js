@@ -1,30 +1,16 @@
-const CACHE_NAME = 'husti-cache-v12';
-const ASSETS = [
-  './',
-  './index.html',
-  './styles.css?v=12',
-  './script.js?v=12',
-  './supabase-config.js',
-  './icon.svg?v=4',
-  './manifest.webmanifest'
-];
+const CACHE_NAME = 'husti-pwa-cache-dynamic';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS);
-    })
-  );
 });
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            return caches.delete(cache);
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
           }
         })
       );
@@ -32,10 +18,20 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+/* NETWORK FIRST STRATEGY */
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
+    fetch(e.request)
+      .then((networkResponse) => {
+        // If network request succeeds, clone it and toss it in the cache for offline fallback
+        return caches.open(CACHE_NAME).then((cache) => {
+          cache.put(e.request, networkResponse.clone());
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // If network fails (offline), load from cache
+        return caches.match(e.request);
+      })
   );
 });
