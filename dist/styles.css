@@ -292,32 +292,6 @@ a { color: inherit; text-decoration: none; }
     position: relative;
 }
 
-.phone-glow-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-    z-index: 1;
-}
-
-.phone-glow-bg {
-    position: absolute;
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, rgba(163, 230, 53, 0.25) 0%, rgba(244, 63, 94, 0.12) 50%, rgba(255, 255, 255, 0) 70%);
-    filter: blur(55px);
-    z-index: 0;
-    pointer-events: none;
-    animation: glow-rotate 12s linear infinite;
-}
-
-@keyframes glow-rotate {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.15); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
 /* ─── FLOATING BADGES ─── */
 .floating-badge {
     position: absolute;
@@ -1345,8 +1319,8 @@ a { color: inherit; text-decoration: none; }
 
 /* ─── PREMIUM 3D DRAWER BUTTON ─── */
 .drawer-btn-container {
-  --btn-color: #000000;
-  --corner-color: rgba(0, 0, 0, 0.12);
+  --btn-color: #d8ff7c;
+  --corner-color: rgba(0, 0, 0, 0.08);
   --corner-dist: 24px;
   --corner-multiplier: 1.5;
   --timing-function: cubic-bezier(0, 0, 0, 2.5);
@@ -1364,15 +1338,18 @@ a { color: inherit; text-decoration: none; }
   min-width: 240px;
   min-height: calc(var(--corner-dist) * 2);
   border-radius: 16px;
-  border: 2px solid #000000;
+  border: none;
   padding: 0.8em 2.2em;
-  background: var(--btn-color);
+  background: linear-gradient(#ffffff20, #00000010), var(--btn-color);
   box-shadow:
-    0 4px 0px var(--accent-lime),
-    0 8px 16px rgba(0,0,0,0.15);
+    1px 1px 2px -1px #fff inset,
+    0 2px 1px rgba(0,0,0,0.06),
+    0 4px 2px rgba(0,0,0,0.06),
+    0 8px 4px rgba(0,0,0,0.06),
+    0 16px 8px rgba(0,0,0,0.06);
   cursor: pointer;
   z-index: 5;
-  transition: transform var(--duration) var(--timing-function), box-shadow var(--duration) var(--timing-function);
+  transition: transform var(--duration) var(--timing-function);
 }
 
 .drawer-btn-drawer {
@@ -1381,12 +1358,14 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   min-height: 32px;
   border-radius: 12px;
-  border: 1.5px solid #000000;
+  border: none;
   padding: 0.25em 1.2em;
   font-size: 0.75rem;
   font-weight: 800;
   font-family: var(--font-main);
   text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  background: linear-gradient(#ffffff20, #00000010), #fbff13;
   opacity: 0;
   z-index: 1;
 
@@ -1402,16 +1381,12 @@ a { color: inherit; text-decoration: none; }
   left: 16px;
   border-radius: 12px 12px 0 0;
   align-items: start;
-  background: linear-gradient(#ffffff20, #00000010), #dcfce7;
-  color: #15803d;
 }
 .drawer-btn-container .transition-bottom {
   bottom: 0;
   right: 16px;
   border-radius: 0 0 12px 12px;
   align-items: end;
-  background: linear-gradient(#ffffff20, #00000010), #ffe4e6;
-  color: #b91c1c;
 }
 
 .drawer-btn-text {
@@ -1420,7 +1395,11 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-sub);
   font-weight: 900;
   text-transform: uppercase;
-  color: #ffffff;
+  background-image: linear-gradient(#444444, #000000aa);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,0.4)) drop-shadow(0 -1px 0 rgba(0,0,0,0.4));
   transition: transform var(--duration) var(--timing-function);
 }
 
@@ -1464,9 +1443,7 @@ a { color: inherit; text-decoration: none; }
 /* Hover and Focus States */
 .drawer-btn-container:hover .drawer-btn {
   transform: scale(1.05);
-  box-shadow:
-    0 6px 0px var(--accent-lime),
-    0 12px 24px rgba(0,0,0,0.25);
+  filter: drop-shadow(0 16px 16px rgba(0,0,0,0.1));
 }
 
 .drawer-btn-container:hover .transition-top {
@@ -1528,10 +1505,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Active / Pressed States */
 .drawer-btn-container:active .drawer-btn {
-  transform: scale(0.96) translateY(4px);
-  box-shadow:
-    0 0px 0px var(--accent-lime),
-    0 4px 8px rgba(0,0,0,0.15);
+  transform: scale(0.95);
+  box-shadow: 1px 1px 1px -1px #fff inset, 0 2px 2px rgba(0,0,0,0.1);
 }
 
 .drawer-btn-container:active .transition-top,

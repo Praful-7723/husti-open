@@ -1918,20 +1918,78 @@ window.addEventListener('beforeinstallprompt', (e) => {
 function setupPWAInstall() {
   const btn = document.getElementById("pwa-install-button");
   const card = document.getElementById("pwa-install-card");
-  if (!btn) return;
   
-  btn.addEventListener("click", async () => {
-    if (!deferredInstallPrompt) return;
-    deferredInstallPrompt.prompt();
-    const { outcome } = await deferredInstallPrompt.userChoice;
-    console.log(`User choice PWA: ${outcome}`);
-    deferredInstallPrompt = null;
-    if (card) card.style.display = "none";
-  });
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      const { outcome } = await deferredInstallPrompt.userChoice;
+      console.log(`User choice PWA: ${outcome}`);
+      deferredInstallPrompt = null;
+      if (card) card.style.display = "none";
+    });
+  }
   
   window.addEventListener('appinstalled', () => {
     deferredInstallPrompt = null;
     if (card) card.style.display = "none";
+    const landingOverlay = document.getElementById('pwa-landing-install-overlay');
+    if (landingOverlay) landingOverlay.style.display = "none";
     console.log('PWA app installed successfully');
   });
+
+  // Handle landing page direct install redirect: /app/?install=true
+  const urlParams = new URLSearchParams(window.location.search);
+  const isInstallRequested = urlParams.get('install') === 'true';
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+  if (isInstallRequested && !isStandalone) {
+    const installOverlay = document.getElementById('pwa-landing-install-overlay');
+    if (installOverlay) {
+      installOverlay.style.display = 'flex';
+      
+      const installBtn = document.getElementById('pwa-landing-install-btn');
+      const skipBtn = document.getElementById('pwa-landing-skip-btn');
+      
+      if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+          if (deferredInstallPrompt) {
+            deferredInstallPrompt.prompt();
+            const { outcome } = await deferredInstallPrompt.userChoice;
+            console.log(`User choice PWA landing prompt: ${outcome}`);
+            deferredInstallPrompt = null;
+            installOverlay.style.display = 'none';
+          } else {
+            installBtn.textContent = 'Preparing...';
+            let checkPrompt = setInterval(() => {
+              if (deferredInstallPrompt) {
+                clearInterval(checkPrompt);
+                installBtn.textContent = 'Install Now';
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice.then(() => {
+                  deferredInstallPrompt = null;
+                  installOverlay.style.display = 'none';
+                });
+              }
+            }, 200);
+            
+            setTimeout(() => {
+              clearInterval(checkPrompt);
+              if (!deferredInstallPrompt) {
+                installBtn.textContent = 'Install Now';
+                alert('Installation prompt is not supported by your browser in this mode, or the app is already installed. Loading HUSTI in browser...');
+                installOverlay.style.display = 'none';
+              }
+            }, 4000);
+          }
+        });
+      }
+      
+      if (skipBtn) {
+        skipBtn.addEventListener('click', () => {
+          installOverlay.style.display = 'none';
+        });
+      }
+    }
+  }
 }

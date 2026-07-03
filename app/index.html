@@ -457,6 +457,19 @@
       </div>
     </template>
 
+    <!-- PWA LANDING DIRECT INSTALL OVERLAY -->
+    <div id="pwa-landing-install-overlay" class="pwa-install-overlay" style="display: none;">
+      <div class="pwa-install-modal brutal-box">
+        <img src="./icon.png" class="pwa-install-logo" alt="HUSTI" />
+        <h2>Install HUSTI App</h2>
+        <p>Add HUSTI to your home screen or desktop for a fast, native, offline-first experience.</p>
+        <div class="pwa-install-actions">
+          <button id="pwa-landing-install-btn" class="btn btn-primary" style="background: var(--accent-lime); color: #000; border: 2px solid #000; box-shadow: 2px 2px 0px #000; font-weight: 800; padding: 12px 20px; border-radius: 12px; cursor: pointer;">Install Now</button>
+          <button id="pwa-landing-skip-btn" class="btn btn-ghost" style="border: 2px solid #000; box-shadow: 2px 2px 0px #000; font-weight: 800; padding: 12px 20px; border-radius: 12px; cursor: pointer; background: #fff; color: #000;">Skip</button>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="./script.js?v=12"></script>
     <script>
       if ('serviceWorker' in navigator) {

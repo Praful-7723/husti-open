@@ -28,34 +28,23 @@ function showInstallModal() {
         return;
     }
 
+    const platform = getPlatform();
+    if (platform !== 'ios') {
+        window.location.href = HUSTI_APP_URL + '?install=true';
+        return;
+    }
+
     const overlay = document.getElementById('install-overlay');
     const content = document.getElementById('install-content');
     const appLink = document.getElementById('install-open-app');
     appLink.href = HUSTI_APP_URL;
 
-    const platform = getPlatform();
-    let html = '';
-
-    if (platform === 'ios') {
-        html = `<div class="install-steps">
-            <div class="install-step"><span class="install-step-num">1</span><p>Open the HUSTI app link below in <strong>Safari</strong> (not Chrome)</p></div>
-            <div class="install-step"><span class="install-step-num">2</span><p>Tap the <strong>Share</strong> button <strong style="font-size:1.2em">↑</strong> at the bottom</p></div>
-            <div class="install-step"><span class="install-step-num">3</span><p>Scroll down and tap <strong>"Add to Home Screen"</strong></p></div>
-            <div class="install-step"><span class="install-step-num">4</span><p>Tap <strong>"Add"</strong> — HUSTI is now on your home screen!</p></div>
-        </div>`;
-    } else if (platform === 'android') {
-        html = `<div class="install-steps">
-            <div class="install-step"><span class="install-step-num">1</span><p>Open the HUSTI app link below in <strong>Chrome</strong></p></div>
-            <div class="install-step"><span class="install-step-num">2</span><p>Tap the <strong>install banner</strong>, or tap <strong>⋮ → "Add to Home Screen"</strong></p></div>
-            <div class="install-step"><span class="install-step-num">3</span><p>HUSTI appears on your home screen as a <strong>native app</strong>!</p></div>
-        </div>`;
-    } else {
-        html = `<div class="install-steps">
-            <div class="install-step"><span class="install-step-num">1</span><p>Open the HUSTI app link below in <strong>Chrome</strong> or <strong>Edge</strong></p></div>
-            <div class="install-step"><span class="install-step-num">2</span><p>Click the <strong>install icon ⊕</strong> in the address bar (right side)</p></div>
-            <div class="install-step"><span class="install-step-num">3</span><p>Click <strong>"Install"</strong> — HUSTI opens as a <strong>desktop app</strong>!</p></div>
-        </div>`;
-    }
+    let html = `<div class="install-steps">
+        <div class="install-step"><span class="install-step-num">1</span><p>Open the HUSTI app link below in <strong>Safari</strong> (not Chrome)</p></div>
+        <div class="install-step"><span class="install-step-num">2</span><p>Tap the <strong>Share</strong> button <strong style="font-size:1.2em">↑</strong> at the bottom</p></div>
+        <div class="install-step"><span class="install-step-num">3</span><p>Scroll down and tap <strong>"Add to Home Screen"</strong></p></div>
+        <div class="install-step"><span class="install-step-num">4</span><p>Tap <strong>"Add"</strong> — HUSTI is now on your home screen!</p></div>
+    </div>`;
 
     content.innerHTML = html;
     overlay.classList.add('active');
@@ -299,25 +288,6 @@ function setupComparisonToggle() {
     });
 }
 
-// ─── Phone Mockup 3D Tilt Effect ───
-function setupPhoneTilt() {
-    const phone = document.querySelector('.phone-frame');
-    if (!phone) return;
-
-    phone.addEventListener('mousemove', (e) => {
-        const rect = phone.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        phone.style.animationPlayState = 'paused';
-        phone.style.transform = `perspective(1000px) scale(1.03) rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
-    });
-
-    phone.addEventListener('mouseleave', () => {
-        phone.style.animationPlayState = 'running';
-        phone.style.transform = '';
-    });
-}
-
 // ─── Init ───
 document.addEventListener('DOMContentLoaded', () => {
     setupScrollProgress();
@@ -332,5 +302,4 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCounters();
     setupCardTilt();
     setupComparisonToggle();
-    setupPhoneTilt();
 });
