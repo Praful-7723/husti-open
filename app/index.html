@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HUSTI Elite</title>
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Outfit:wght@300;500;700;900&family=Syne:wght@600;800&family=Space+Grotesk:wght@500;700&family=Bruno+Ace&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css?v=12" />
+  </head>
+  <body>
+
+    <!-- 25-Second Strict Non-Cancelable Onboarding Overlay (Light Theme) -->
+    <div id="first-load-overlay" class="auth-layer" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.5rem;">
+      
+      <!-- ONBOARD SCREEN 1: CHOICE -->
+      <div id="onboard-screen-choice" class="light-onboard-card" style="background: #fdfdfd; border: 3px solid #000; border-radius: 24px; width: 100%; max-width: 500px; padding: 2.5rem 2rem; box-shadow: 12px 12px 0px #000; text-align: left; display: flex; flex-direction: column; gap: 1.2rem; color: #111; font-family: var(--font-body);">
+        <div style="display: flex; align-items: center; gap: 12px; border-bottom: 2.5px solid #000; padding-bottom: 1rem;">
+          <img src="./icon.png" style="width: 44px; height: 44px; object-fit: contain;">
+          <span style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #000; letter-spacing: 0.5px; text-transform: uppercase;">HUSTI SAVINGS</span>
+        </div>
+        <h2 style="font-family: var(--font-heading); text-transform: uppercase; font-size: 1.25rem; color: #000; margin: 0; font-weight: 900;">Welcome to HUSTI!</h2>
+        <p style="font-size: 0.95rem; line-height: 1.5; color: #222; margin: 0;">
+          HUSTI is a private, client-side habit-based money savings manager. To get started, please tell us:
+        </p>
+        <div style="font-weight: 800; font-size: 1rem; color: #000; text-transform: uppercase; margin-top: 0.5rem; text-align: center;">
+          Are you new or migrating?
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+          <button id="onboard-choice-new" class="btn-brutal" style="background: var(--accent-lime); color: #000; font-weight: 900; padding: 0.8rem; border-radius: 8px; border: 2px solid #000; width: 100%; cursor: pointer; text-transform: uppercase; font-family: var(--font-heading); box-shadow: 4px 4px 0px #000;">I am new to HUSTI</button>
+          <button id="onboard-choice-migrate" class="btn-brutal" style="background: #fff; color: #000; font-weight: 900; padding: 0.8rem; border-radius: 8px; border: 2px solid #000; width: 100%; cursor: pointer; text-transform: uppercase; font-family: var(--font-heading); box-shadow: 4px 4px 0px #000;">I am migrating (Load Backup)</button>
+          <input id="onboard-import-file" type="file" accept="application/json" style="display: none;" />
+        </div>
+      </div>
+
+      <!-- ONBOARD SCREEN 2: INSTRUCTIONS & COUNTDOWN -->
+      <div id="onboard-screen-info" class="light-onboard-card" style="display: none; background: #fdfdfd; border: 3px solid #000; border-radius: 24px; width: 100%; max-width: 520px; padding: 2.5rem 2rem; box-shadow: 12px 12px 0px #000; text-align: left; flex-direction: column; gap: 1.2rem; color: #111; font-family: var(--font-body);">
+        <div style="display: flex; align-items: center; gap: 12px; border-bottom: 2.5px solid #000; padding-bottom: 1rem;">
+          <img src="./icon.png" style="width: 44px; height: 44px; object-fit: contain;">
+          <span style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #000; letter-spacing: 0.5px; text-transform: uppercase;">HUSTI Guide</span>
+        </div>
+        <h2 style="font-family: var(--font-heading); text-transform: uppercase; font-size: 1.25rem; color: #000; margin: 0; font-weight: 900;">Important Onboarding Info</h2>
+        <div style="display: flex; flex-direction: column; gap: 0.8rem; font-size: 0.85rem; line-height: 1.45; color: #222;">
+          <div style="border-left: 3.5px solid #000; padding-left: 0.6rem;">
+            <strong style="color: #000; display: block; margin-bottom: 2px; font-weight: 800; text-transform: uppercase;">📂 100% Offline Caching</strong>
+            No servers are connected. Your data resides solely in this browser. Clearing cache wipes data.
+          </div>
+          <div style="border-left: 3.5px solid #000; padding-left: 0.6rem;">
+            <strong style="color: #000; display: block; margin-bottom: 2px; font-weight: 800; text-transform: uppercase;">🖼️ Wallpapers Customizer</strong>
+            Click the HUSTI logo (top-left) inside the calendar view to customize, add, or toggle background wallpapers.
+          </div>
+          <div style="border-left: 3.5px solid #000; padding-left: 0.6rem;">
+            <strong style="color: #000; display: block; margin-bottom: 2px; font-weight: 800; text-transform: uppercase;">⚡ Safe Lag Clear</strong>
+            If performance lags, export your backup JSON in settings, clear browser storage, and re-import.
+          </div>
+        </div>
+        <button id="notice-agree-button" class="btn-brutal" style="background: var(--accent-lime); color: #000; font-weight: 900; font-size: 0.95rem; padding: 0.8rem; border-radius: 8px; cursor: not-allowed; opacity: 0.4; width: 100%; border: 2px solid #000; font-family: var(--font-heading); text-transform: uppercase; box-shadow: 4px 4px 0px #000;" disabled>Please wait... (25s)</button>
+      </div>
+    </div>
+
+    <!-- Fluid background graphics -->
+    <div id="fluid-layer">
+      <div class="fluid-bg fluid-purple"></div>
+      <div class="fluid-bg fluid-lime"></div>
+    </div>
+    
+    <!-- Image Wallpaper Layer -->
+    <div id="wallpaper-layer"></div>
+
+    <nav class="top-nav">
+      <div class="brand" id="brand-logo" style="cursor: pointer; position: relative;">
+        <img src="./icon.png" alt="HUSTI Logo" style="width: 72px; height: 72px; margin-right: 14px; object-fit: contain;">
+        <span class="husti-text">HUSTI</span>
+        <div id="bg-dropdown" class="premium-bg-dropdown">
+          <div class="bg-option" data-bg="bg/cozy-savings-jar.png">Cozy Savings Jar 🪙</div>
+          <div class="bg-option" data-bg="bg/cliffside-tropical-cafe-moewalls-com.mp4">Cliffside Cafe Live</div>
+          <div class="bg-option" data-bg="bg/anime-moon-landscape.jpg">Moon Landscape</div>
+          <div class="bg-option" data-bg="bg/anime-moon-landscape (1).jpg">Moon Alt</div>
+          <div class="bg-option" data-bg="bg/black-cat-riding-turtle-ocean.jpg">Cosmic Cat</div>
+          <div class="bg-option" data-bg="fluid">Original Fluid Orbs</div>
+          <div class="bg-slider-wrap" style="padding: 1rem 1.2rem; border-top: 1px solid rgba(255,255,255,0.15); margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: var(--text-dim); font-size: 0.85rem; font-family: var(--font-body); font-weight: 700; text-transform: uppercase;">Image Opacity</span>
+              <span id="bg-opacity-val" style="color: var(--accent-white); font-size: 0.85rem; font-family: var(--font-body); font-weight: 700;">60%</span>
+            </div>
+            <input type="range" id="bg-opacity" min="0" max="1" step="0.05" value="0.6" style="width: 100%; cursor: pointer;">
+          </div>
+        </div>
+      </div>
+      <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
+        <button id="today-button" class="btn-brutal premium-today-btn mobile-abs-top-right">TODAY</button>
+        <button id="instruction-btn" class="btn-brutal btn-outline" style="font-weight: 800; font-family: var(--font-heading); font-size: 0.75rem; padding: 0.4rem 0.8rem; border-radius: 8px;">INFO</button>
+        <div class="nav-controls">
+          <button class="nav-pill active" data-view="view-calendar">Calendar</button>
+          <button class="nav-pill" data-view="view-analytics">Analytics</button>
+          <button class="nav-pill" data-view="view-settings">Settings</button>
+        </div>
+      </div>
+      </div>
+    </nav>
+
+    <main class="viewport-stage">
+      <!-- CALENDAR VIEW -->
+      <section id="view-calendar" class="master-view active">
+        <header class="calendar-header" style="flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; justify-content: center; width: 100%;">
+            <button id="prev-year" class="brutal-icon">&laquo;</button>
+            <button id="prev-month" class="brutal-icon">&larr;</button>
+            <div class="title-container">
+              <h1 id="month-label" class="brutal-heading">Month 2026</h1>
+            </div>
+            <button id="next-month" class="brutal-icon">&rarr;</button>
+            <button id="next-year" class="brutal-icon">&raquo;</button>
+          </div>
+          
+          <div class="calendar-sub-header" style="display: flex; justify-content: center; align-items: stretch; gap: 1rem; width: 100%; margin-top: 0.2rem;">
+            <div id="streak-indicator" class="premium-streak">
+              <span style="font-size:1.1rem; filter: drop-shadow(0 0 8px rgba(255,58,32,0.8));">🔥</span>
+              <span id="streak-count">0 DAYS</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="calendar-container">
+          <div class="weekday-header" id="weekday-row"></div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS VIEW -->
+      <section id="view-analytics" class="master-view">
+        <header class="calendar-header" style="margin-bottom: 1rem; flex-wrap: wrap; justify-content: center; gap: 0.8rem;">
+          <h1 class="brutal-heading accent-orange">SAVINGS DASHBOARD</h1>
+          <div style="display: flex; gap: 0.5rem; justify-content: space-between; align-items: center; background: var(--bg-surface); padding: 0.5rem 0.8rem; border-radius: 100px; border: var(--border-thin); width: 100%; max-width: 350px;">
+            <button id="ana-prev-month" class="brutal-icon" style="width: 40px; height: 40px; flex-shrink: 0; font-size: 1.2rem;">&larr;</button>
+            <span id="ana-month-label" style="font-family: var(--font-heading); font-weight: 700; width: 100%; text-align: center; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase;">Month 2026</span>
+            <button id="ana-next-month" class="brutal-icon" style="width: 40px; height: 40px; flex-shrink: 0; font-size: 1.2rem;">&rarr;</button>
+          </div>
+        </header>
+        <div class="analytics-grid" style="margin-bottom: 1rem;">
+          <div class="stat-block box-purple">
+             <span class="stat-label">Total Savings</span>
+             <strong id="current-bankroll" class="stat-value">₹0</strong>
+          </div>
+          <div class="stat-block box-lime">
+             <span class="stat-label">All-Time Net Saved</span>
+             <strong id="overall-net" class="stat-value">₹0</strong>
+          </div>
+          <div class="stat-block box-red">
+             <span class="stat-label">Month Net Saved</span>
+             <strong id="month-net" class="stat-value">₹0</strong>
+             <small id="month-breakdown">0 savings days</small>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Week Net Saved</span>
+             <strong id="week-net" class="stat-value">₹0</strong>
+             <small id="week-breakdown">0 savings actions</small>
+          </div>
+          <div class="stat-block box-dark span-2">
+             <span class="stat-label">Biggest Saving Day</span>
+             <strong id="best-day" class="stat-value">₹0</strong>
+             <small id="best-day-label" class="accent-lime">N/A</small>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Top Jar / Fund</span>
+             <strong id="best-site" class="stat-value-sub accent-purple">N/A</strong>
+          </div>
+          <div class="stat-block box-dark">
+             <span class="stat-label">Top Habit</span>
+             <strong id="best-game" class="stat-value-sub accent-lime">N/A</strong>
+          </div>
+        </div>
+
+        <!-- DAILY TREND VISUALIZER -->
+        <div class="stat-block box-dark" style="margin-top: 1rem; padding: 1.5rem; border-radius: 20px; min-height: 250px; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;">
+          <h3 style="font-family: var(--font-heading); text-transform: uppercase; font-size: 1.25rem; margin: 0; color: var(--text-main); font-weight: 900; letter-spacing: 0.05em;">Daily Savings Trend (Last 7 Days)</h3>
+          <div id="analytics-bar-chart" style="display: flex; align-items: flex-end; justify-content: space-between; height: 180px; padding: 1rem 0; border-bottom: 2px solid rgba(255,255,255,0.15); gap: 1.2rem; width: 100%;">
+            <!-- Dynamic columns will be rendered here by script.js -->
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; padding-top: 0.2rem; font-weight: 700; font-family: var(--font-body);">
+            <span id="trend-start-date">7 Days Ago</span>
+            <span id="trend-end-date">Today</span>
+          </div>
+        </div>
+
+        <!-- MONTHLY TARGET, SAVINGS GOALS & ACHIEVEMENTS -->
+        <div class="savings-dashboard" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; margin-top: 1rem; flex-shrink: 0;">
+          <!-- Left panel: Goals & Target -->
+          <div class="dashboard-panel brutal-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--accent-white); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0;">Monthly Target</h3>
+              <button id="edit-target-btn" class="btn-brutal btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; border-radius: 6px;">Set Target</button>
+            </div>
+            
+            <!-- Monthly Target Edit Form (Hidden by default) -->
+            <form id="target-edit-form" class="flex-form" style="display:none; margin-bottom:1rem; gap:0.5rem;">
+              <input id="target-value-input" type="number" placeholder="Target Savings (₹)" class="brutal-input" style="padding:0.4rem 0.8rem; font-size:0.9rem;" required />
+              <button type="submit" class="btn-brutal btn-primary" style="padding:0.4rem 0.8rem; font-size:0.8rem; border-radius: 6px;">Save</button>
+              <button type="button" id="target-cancel-btn" class="btn-brutal btn-outline" style="padding:0.4rem 0.8rem; font-size:0.8rem; border-radius: 6px;">Cancel</button>
+            </form>
+
+            <div id="target-progress-container" style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.5rem;">
+              <div style="display:flex; justify-content:space-between; font-weight:700; font-family:var(--font-body); font-size:0.9rem;">
+                <span id="target-saved-text" class="accent-lime">Saved: ₹0</span>
+                <span id="target-limit-text" style="color:var(--text-dim)">Target: ₹10,000</span>
+              </div>
+              <div class="progress-bar-bg" style="width:100%; height:12px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden; border: var(--border-thin);">
+                <div id="target-progress-fill" style="width:0%; height:100%; background:var(--accent-lime); transition:width 0.3s;"></div>
+              </div>
+              <small id="target-status-label" style="opacity:0.8; font-weight:700; font-family:var(--font-body); font-size:0.8rem;">0% achieved</small>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--accent-white); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">
+              <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin: 0;">Savings Goals</h3>
+              <button id="add-goal-btn" class="btn-brutal btn-primary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem; border-radius: 6px;">+ Add Goal</button>
+            </div>
+            
+            <!-- Goals Input Form (Hidden by default) -->
+            <form id="goal-input-form" class="stack-form" style="display:none; margin-bottom:1rem; gap:0.5rem; padding:0.8rem; background:rgba(255,255,255,0.05); border-radius:10px; border:var(--border-thin);">
+              <div style="display:flex; gap:0.5rem;">
+                <input id="goal-name-input" type="text" placeholder="Goal Name (e.g. Travel)" class="brutal-input" style="padding:0.4rem 0.8rem; font-size:0.9rem;" required />
+                <input id="goal-amount-input" type="number" placeholder="Target (₹)" class="brutal-input" style="padding:0.4rem 0.8rem; font-size:0.9rem;" required />
+              </div>
+              <div style="display:flex; gap:0.5rem;">
+                <button type="submit" class="btn-brutal btn-primary" style="padding:0.3rem 0.8rem; font-size:0.8rem; border-radius: 6px;">Add Goal</button>
+                <button type="button" id="goal-cancel-btn" class="btn-brutal btn-outline" style="padding:0.3rem 0.8rem; font-size:0.8rem; border-radius: 6px;">Cancel</button>
+              </div>
+            </form>
+
+            <div id="goals-list-container" style="display:flex; flex-direction:column; gap:0.8rem; max-height: 180px; overflow-y: auto; padding-right: 0.5rem;">
+              <!-- Dynamic Goals list -->
+            </div>
+          </div>
+
+          <!-- Right panel: Achievements & Badges -->
+          <div class="dashboard-panel brutal-box">
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; border-bottom: 2px solid var(--accent-white); padding-bottom: 0.5rem; margin-bottom: 0.8rem;">Savings Badges</h3>
+            <div id="badges-shelf" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:0.6rem; max-height: 300px; overflow-y: auto; padding-right: 0.5rem;">
+              <!-- Dynamic Badges -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS VIEW -->
+      <section id="view-settings" class="master-view">
+        <h1 class="brutal-heading accent-lime">SETTINGS</h1>
+        <div class="settings-grid">
+           <div class="settings-card brutal-box">
+             <h3>Savings Base</h3>
+             <form id="bankroll-form" class="flex-form">
+               <input id="starting-bankroll" type="number" step="0.01" placeholder="Initial Savings (INR)" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-primary">Save</button>
+             </form>
+           </div>
+           <div class="settings-card brutal-box">
+             <h3>Manage Jars & Habits</h3>
+             <form id="site-form" class="flex-form mb-2">
+               <input id="site-name" type="text" placeholder="Add Saving Jar / Fund" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-secondary">+</button>
+             </form>
+             <div id="site-list" class="tag-list mb-4"></div>
+             
+             <form id="game-form" class="flex-form mb-2">
+               <input id="game-name" type="text" placeholder="Add Saving Habit" class="brutal-input" />
+               <button type="submit" class="btn-brutal btn-secondary">+</button>
+             </form>
+             <div id="game-list" class="tag-list"></div>
+           </div>
+           <div class="settings-card brutal-box">
+             <h3>Data Vault</h3>
+             <div class="flex-form">
+               <button id="export-button" class="btn-brutal btn-outline">Export Backup</button>
+               <button id="import-button" class="btn-brutal btn-outline">Import Backup</button>
+               <input id="import-file" type="file" accept="application/json" hidden />
+             </div>
+             <p id="status-text" class="status-indicator">Ready.</p>
+              <div class="danger-zone" style="margin-top: 1rem; border-top: 2px solid var(--accent-orange); padding-top: 1.2rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                <h4 style="color: var(--accent-orange); font-family: var(--font-heading); text-transform: uppercase; font-size: 1.1rem; margin: 0;">Danger Zone</h4>
+                <p style="font-size: 0.8rem; color: var(--text-dim); margin: 0; line-height: 1.4;">Delete all local savings log data and configuration from this browser. This action is irreversible.</p>
+                <button id="clear-data-button" class="btn-brutal" style="background: var(--accent-orange); color: white; width: 100%; padding: 0.6rem 1.2rem; font-size: 0.9rem; border-radius: 8px; margin-top: 0.4rem;">Clear All Data</button>
+            </div>
+          </div>
+            
+            <div class="settings-card brutal-box">
+              <h3>Preferences</h3>
+              <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                <label for="currency-select" style="font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">App Currency</label>
+                <select id="currency-select" class="brutal-input" style="width: 100%; background: var(--bg-core); color: var(--text-main); font-weight: 700; border-radius: 8px; padding: 0.6rem; border: var(--border-thin);">
+                  <option value="₹">Rupee (₹)</option>
+                  <option value="$">Dollar ($)</option>
+                  <option value="€">Euro (€)</option>
+                  <option value="£">Pound (£)</option>
+                  <option value="¥">Yen / Yuan (¥)</option>
+                  <option value="₩">Won (₩)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="settings-card brutal-box" id="presets-manager-card">
+              <h3>Manage Presets</h3>
+              <div id="settings-presets-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 150px; overflow-y: auto; margin-bottom: 1rem; padding-right: 0.5rem;">
+                <!-- Presets dynamically loaded -->
+              </div>
+              
+              <form id="settings-preset-form" class="stack-form" style="background: rgba(255,255,255,0.02); padding: 0.8rem; border-radius: 12px; border: var(--border-thin); gap: 0.6rem;">
+                <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim); text-transform:uppercase;">Add Custom Preset</span>
+                <div style="display: flex; gap: 0.4rem;">
+                  <input id="preset-emoji-input" type="text" placeholder="Emoji" class="brutal-input" style="padding: 0.5rem; width: 65px; font-size: 0.9rem; text-align: center;" required />
+                  <input id="preset-label-input" type="text" placeholder="Label (e.g. Snack)" class="brutal-input" style="padding: 0.5rem; font-size: 0.9rem;" required />
+                </div>
+                <div style="display: flex; gap: 0.4rem;">
+                  <select id="preset-site-select" class="brutal-input" style="padding: 0.5rem; font-size: 0.85rem; background: var(--bg-core); color: var(--text-main); font-weight: 700; border-radius: 8px; border: var(--border-thin);">
+                    <!-- Jars choices loaded dynamically -->
+                  </select>
+                  <select id="preset-game-select" class="brutal-input" style="padding: 0.5rem; font-size: 0.85rem; background: var(--bg-core); color: var(--text-main); font-weight: 700; border-radius: 8px; border: var(--border-thin);">
+                    <!-- Habits choices loaded dynamically -->
+                  </select>
+                </div>
+                <div style="display: flex; gap: 0.4rem;">
+                  <input id="preset-won-input" type="number" step="0.01" placeholder="Saved ₹" class="brutal-input text-lime" required />
+                  <input id="preset-lost-input" type="number" step="0.01" placeholder="Spent ₹" class="brutal-input text-red" required />
+                </div>
+                <button type="submit" class="btn-brutal btn-secondary" style="padding: 0.5rem; font-size: 0.85rem; width: 100%;">Create Preset</button>
+              </form>
+            </div>
+
+            <div class="settings-card brutal-box" id="pwa-install-card" style="display: none;">
+              <h3>App Installation</h3>
+              <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.8rem; line-height: 1.45;">Install HUSTI to your home screen to launch it directly as a native PWA with offline support.</p>
+              <button id="pwa-install-button" class="btn-brutal btn-primary" style="width: 100%; justify-content: center; border-radius: 8px; padding: 0.6rem 1rem;">Install App</button>
+            </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Light-Themed Info Manual Modal -->
+    <div id="instruction-modal" class="modal-overlay" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.5rem;">
+      <div class="light-onboard-card" style="background: #fdfdfd; border: 3px solid #000; border-radius: 24px; width: 100%; max-width: 480px; padding: 2rem; box-shadow: 12px 12px 0px #000; text-align: left; position: relative; color: #111; font-family: var(--font-body);">
+        <button id="close-instruction-modal" style="position: absolute; top: 1.2rem; right: 1.2rem; background: none; border: none; color: #000; cursor: pointer; font-size: 2rem; line-height: 1; padding: 0; font-weight: bold;">&times;</button>
+        
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem; border-bottom: 2.5px solid #000; padding-bottom: 0.8rem;">
+          <img src="./icon.png" style="width: 32px; height: 32px; object-fit: contain;">
+          <span style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; color: #000; text-transform: uppercase; letter-spacing: 0.5px;">HUSTI Manual</span>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.2rem; font-size: 0.9rem; line-height: 1.5; color: #222;">
+          <div>
+            <strong style="color: #000; display: block; margin-bottom: 3px; font-weight: 800; font-size: 1rem; text-transform: uppercase;">❓ Why & What is HUSTI?</strong>
+            HUSTI is a private, serverless savings manager built to make saving habitual. No cloud servers are connected, keeping your financial logs 100% private.
+          </div>
+          <div>
+            <strong style="color: #000; display: block; margin-bottom: 3px; font-weight: 800; font-size: 1rem; text-transform: uppercase;">💾 How to Back Up?</strong>
+            Since HUSTI saves data locally, clearing browser cache deletes it. To protect your data, go to <strong>Settings -> Data Vault</strong> and click <strong>"Export Backup"</strong>. Save this file. If you switch devices, click <strong>"Import Backup"</strong> to restore.
+          </div>
+          <div>
+            <strong style="color: #000; display: block; margin-bottom: 3px; font-weight: 800; font-size: 1rem; text-transform: uppercase;">🖼️ How to Change Background?</strong>
+            Click the <strong>HUSTI logo</strong> (top-left) in the navigation bar to open the wallpaper menu. Wallpapers are shown only in the <strong>Calendar</strong> view to keep Analytics and Settings views clean.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM INFORMATION CARD (MODAL) -->
+    <div id="info-modal" class="modal-overlay">
+      <div class="info-card">
+        <button id="close-modal" class="modal-close-btn">&times;</button>
+        
+        <div class="card-header">
+           <h2 id="modal-date-heading" class="modal-heading">Date</h2>
+           <span id="session-count" class="pill-badge">0</span>
+        </div>
+ 
+        <div class="insight-split">
+          <div class="insight-box box-lime">
+            <span class="insight-label">Net Saved</span>
+            <strong id="modal-net" class="insight-hero">₹0</strong>
+          </div>
+          <div class="insight-sub-split">
+            <div class="sub-box">
+              <span class="insight-label">Saved</span>
+              <strong id="modal-won" class="insight-val accent-lime">₹0</strong>
+            </div>
+            <div class="sub-box">
+              <span class="insight-label">Spent</span>
+              <strong id="modal-lost" class="insight-val accent-red">₹0</strong>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="modal-body-scroll">
+          <div class="entry-section" id="record-action-section">
+            <h3 class="section-title">Record Savings/Spend</h3>
+            
+            <!-- Quick Save Presets -->
+            <div class="presets-container" style="display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1rem; background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 12px; border: var(--border-thin);">
+              <span style="font-size:0.75rem; font-weight:700; color:var(--text-dim); text-transform:uppercase; font-family:var(--font-body);">Quick-Add Presets</span>
+              <div id="modal-presets-list" style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+                <!-- Preset buttons are rendered dynamically here -->
+              </div>
+            </div>
+
+            <form id="session-form" class="brutal-form">
+              <input id="session-label" type="text" placeholder="Description..." class="brutal-input" />
+              <div class="input-grid">
+                 <!-- Custom Dropdown Site -->
+                 <div class="custom-select-wrapper" id="site-wrapper">
+                   <div class="custom-select" id="site-select">
+                     <span class="cs-label">Select Jar/Fund...</span> <span class="cs-arrow">▼</span>
+                   </div>
+                   <div class="custom-select-options" id="site-options"></div>
+                   <input type="hidden" id="session-site" required>
+                 </div>
+                 
+                 <!-- Custom Dropdown Game -->
+                 <div class="custom-select-wrapper" id="game-wrapper">
+                   <div class="custom-select" id="game-select">
+                     <span class="cs-label">Select Habit/Method...</span> <span class="cs-arrow">▼</span>
+                   </div>
+                   <div class="custom-select-options" id="game-options"></div>
+                   <input type="hidden" id="session-game" required>
+                 </div>
+ 
+                 <input id="session-won" type="number" step="0.01" placeholder="Saved ₹" class="brutal-input text-lime" required />
+                 <input id="session-lost" type="number" step="0.01" placeholder="Spent ₹" class="brutal-input text-red" required />
+              </div>
+              <button type="submit" class="btn-brutal btn-primary w-100">LOG ENTRY</button>
+            </form>
+          </div>
+ 
+          <div class="entry-section">
+             <h3 class="section-title">Journal</h3>
+             <form id="notes-form" class="brutal-form">
+               <textarea id="daily-notes" rows="3" placeholder="End of day thoughts..." class="brutal-input"></textarea>
+               <button type="submit" class="btn-brutal btn-secondary w-100">SAVE</button>
+             </form>
+          </div>
+ 
+          <div class="entry-section">
+             <h3 class="section-title">Chronicle</h3>
+             <div id="session-list" class="session-scroll-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <template id="tag-template">
+      <div class="brutal-tag">
+        <span></span>
+        <button type="button">&times;</button>
+      </div>
+    </template>
+
+    <script type="module" src="./script.js?v=12"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          navigator.serviceWorker.getRegistrations().then((registrations) => {
+            for (const registration of registrations) {
+              registration.unregister();
+              console.log("Local Dev: Service Worker unregistered.");
+            }
+          });
+          if (window.caches) {
+            caches.keys().then((names) => {
+              for (const name of names) {
+                caches.delete(name);
+                console.log("Local Dev: Cache cleared:", name);
+              }
+            });
+          }
+        } else {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+              .then(reg => console.log('PWA Service Worker Registered', reg.scope))
+              .catch(err => console.error('PWA SW Registration Failed', err));
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

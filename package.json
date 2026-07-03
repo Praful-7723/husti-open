@@ -4,7 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "build": "node build.mjs",
     "serve": "python3 -m http.server 4173"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
   }
 }

@@ -1,4 +1,1 @@
-export const SUPABASE_CONFIG = {
-  url: "",
-  anonKey: ""
-};
+export const SUPABASE_CONFIG = { url: "", anonKey: "" };

@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const dist = path.join(root, "dist");
-const skipNames = new Set(["dist", ".DS_Store"]);
+const skipNames = new Set(["dist", ".DS_Store", "node_modules", ".git", ".gemini", ".gitattributes", ".github", "package.json", "package-lock.json", "build.mjs"]);
 
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(dist, { recursive: true });
