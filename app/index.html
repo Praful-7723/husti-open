@@ -16,7 +16,11 @@
   </head>
   <body>
 
-    <!-- 25-Second Strict Non-Cancelable Onboarding Overlay (Light Theme) -->
+    <!-- Global Preloader for Wallpaper & Page Transitions -->
+    <div id="app-preloader" class="preloader-overlay" style="display: none;">
+      <div class="preloader-spinner"></div>
+      <span class="preloader-text">Loading Wallpaper...</span>
+    </div>
     <div id="first-load-overlay" class="auth-layer" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 99999; align-items: center; justify-content: center; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 1.5rem;">
       
       <!-- ONBOARD SCREEN 1: CHOICE -->

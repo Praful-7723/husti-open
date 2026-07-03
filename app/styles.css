@@ -35,13 +35,19 @@
   100% { background-position: 0% 50%; }
 }
 
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-body);
   background: linear-gradient(135deg, #060814 0%, #0d1207 35%, #050608 70%, #110816 100%);
   background-size: 300% 300%;
   animation: canvas-gradient-shift 15s ease infinite;
   color: var(--text-main);
-  height: 100vh; width: 100vw;
+  height: 100vh;
   overflow: hidden;
   display: flex; flex-direction: column;
   -webkit-font-smoothing: antialiased;
@@ -937,5 +943,53 @@ body.light-theme .chart-x-axis span {
     gap: 12px;
     width: 100%;
     margin-top: 8px;
+}
+
+/* ─── GLOBAL PRELOADER ─── */
+.preloader-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 4, 4, 0.9);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.preloader-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.preloader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-top: 5px solid var(--accent-lime);
+    border-radius: 50%;
+    animation: preloader-spin 0.8s linear infinite;
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+}
+.preloader-text {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    text-transform: uppercase;
+    animation: preloader-pulse 1.5s infinite ease-in-out;
+}
+@keyframes preloader-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes preloader-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 

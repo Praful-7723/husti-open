@@ -567,6 +567,41 @@ function bindBackgroundLogic() {
     el.brandLogo.classList.remove("open");
   });
 }
+function showPreloader(text = "Loading...") {
+  const loader = document.getElementById("app-preloader");
+  if (loader) {
+    const textEl = loader.querySelector(".preloader-text");
+    if (textEl) textEl.textContent = text;
+    loader.style.display = "flex";
+    // Force reflow
+    loader.offsetHeight;
+    loader.classList.add("active");
+  }
+}
+
+function hidePreloader() {
+  const loader = document.getElementById("app-preloader");
+  if (loader) {
+    loader.classList.remove("active");
+    setTimeout(() => {
+      if (!loader.classList.contains("active")) {
+        loader.style.display = "none";
+      }
+    }, 350);
+  }
+}
+
+function syncBackgroundOpacity() {
+  const activeView = document.querySelector(".master-view.active");
+  const targetId = activeView ? activeView.id : "view-calendar";
+  if (targetId === "view-calendar") {
+    el.wallpaperLayer.style.opacity = state.bgOpacity;
+  } else {
+    el.wallpaperLayer.style.opacity = 0;
+  }
+  el.bgOpacity.value = String(state.bgOpacity);
+  el.bgOpacityVal.textContent = `${Math.round(state.bgOpacity * 100)}%`;
+}
 
 function applyBackground(choice) {
   if (choice === DEFAULT_BG) {
@@ -580,23 +615,50 @@ function applyBackground(choice) {
   el.fluidLayer.style.display = "none";
   
   if (choice.endsWith(".mp4")) {
+    showPreloader("Loading Live Theme...");
     el.wallpaperLayer.style.backgroundImage = "none";
-    el.wallpaperLayer.innerHTML = `<video autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));"><source src="${choice}" type="video/mp4"></video>`;
+    
+    const video = document.createElement("video");
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.style.cssText = "position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));";
+    
+    const source = document.createElement("source");
+    source.src = choice;
+    source.type = "video/mp4";
+    video.appendChild(source);
+    
+    video.addEventListener("canplaythrough", () => {
+      el.wallpaperLayer.innerHTML = "";
+      el.wallpaperLayer.appendChild(video);
+      syncBackgroundOpacity();
+      hidePreloader();
+    });
+    
+    video.addEventListener("error", () => {
+      console.error("Live theme video failed to load:", choice);
+      hidePreloader();
+    });
   } else {
-    el.wallpaperLayer.innerHTML = "";
-    el.wallpaperLayer.style.backgroundImage = `url("${choice}")`;
+    showPreloader("Loading Theme...");
+    const img = new Image();
+    img.src = choice;
+    img.onload = () => {
+      el.wallpaperLayer.innerHTML = "";
+      el.wallpaperLayer.style.backgroundImage = `url("${choice}")`;
+      syncBackgroundOpacity();
+      hidePreloader();
+    };
+    img.onerror = () => {
+      console.error("Theme image failed to load:", choice);
+      el.wallpaperLayer.innerHTML = "";
+      el.wallpaperLayer.style.backgroundImage = `url("${choice}")`;
+      syncBackgroundOpacity();
+      hidePreloader();
+    };
   }
-  
-  const activeView = document.querySelector(".master-view.active");
-  const targetId = activeView ? activeView.id : "view-calendar";
-  if (targetId === "view-calendar") {
-    el.wallpaperLayer.style.opacity = state.bgOpacity;
-  } else {
-    el.wallpaperLayer.style.opacity = 0;
-  }
-  
-  el.bgOpacity.value = String(state.bgOpacity);
-  el.bgOpacityVal.textContent = `${Math.round(state.bgOpacity * 100)}%`;
 }
 
 function bindNav() {
