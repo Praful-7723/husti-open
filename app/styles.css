@@ -97,7 +97,7 @@ body {
 
 /* MASTER VERTICAL STAGE */
 .viewport-stage {
-  flex: 1; position: relative; width: 100%; max-width: 1400px; margin: 0 auto;
+  flex: 1; position: relative; width: 100%; max-width: 100%; padding: 0 clamp(10px, 2vw, 24px); margin: 0 auto;
 }
 .master-view {
   position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 1.5rem 2rem;
