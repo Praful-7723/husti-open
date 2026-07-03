@@ -40,27 +40,28 @@
     <!-- ─── HERO ─── -->
     <section class="hero" id="hero">
         <div class="background-plus"></div>
-        <div class="hero-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
-        </div>
+        <div class="hero-glow-orb hero-glow-1"></div>
+        <div class="hero-glow-orb hero-glow-2"></div>
+        <div class="hero-glow-orb hero-glow-3"></div>
+
         <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-badge anim-in">
-                    <span class="badge-dot"></span>🔒 100% Private &amp; Serverless
+                <div class="hero-chips anim-in">
+                    <span class="hero-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Private</span>
+                    <span class="hero-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Offline</span>
+                    <span class="hero-chip hero-chip-accent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Free</span>
                 </div>
+
                 <h1 class="hero-title anim-in d1">
-                    Save Money.<br />
-                    Track Natively.<br />
-                    <span class="highlight-underline">100% Privately.</span>
+                    Build Your<br/>
+                    <span class="hero-title-highlight">Savings Habit</span><br/>
+                    <span class="hero-title-sub">Without Sacrificing Privacy.</span>
                 </h1>
+
                 <p class="hero-desc anim-in d2">
-                    The private money-saving habit tracker that lives entirely on your device.
-                    No cloud servers. No subscriptions. No data harvesting.
-                    Just you and your savings goals.
+                    Track daily savings with a beautiful calendar. Set goals, earn streaks, and watch your money grow — all stored locally on your device. No accounts. No cloud. No fees.
                 </p>
+
                 <div class="hero-btns anim-in d3">
                     <div class="drawer-btn-container download-btn">
                       <div class="drawer-btn-drawer transition-top">Free Forever</div>
@@ -73,81 +74,120 @@
                       <svg class="drawer-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32"><path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path></svg>
                       <svg class="drawer-btn-corner" xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 32 32"><path d="M32,32C14.355,32,0,17.645,0,0h.985c0,17.102,13.913,31.015,31.015,31.015v.985Z"></path></svg>
                     </div>
-                    <a href="#how" class="btn btn-ghost btn-lg" style="margin-left: 1.5rem; vertical-align: middle;">Learn More ↓</a>
+                    <button class="Btn-Container" style="margin-left: 1.5rem; vertical-align: middle;" onclick="document.getElementById('how').scrollIntoView()">
+                      <span class="text">let's go!</span>
+                      <span class="icon-Container">
+                        <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="1.61321" cy="1.61321" r="1.5" fill="black"></circle>
+                          <circle cx="5.73583" cy="1.61321" r="1.5" fill="black"></circle>
+                          <circle cx="5.73583" cy="5.5566" r="1.5" fill="black"></circle>
+                          <circle cx="9.85851" cy="5.5566" r="1.5" fill="black"></circle>
+                          <circle cx="9.85851" cy="9.5" r="1.5" fill="black"></circle>
+                          <circle cx="13.9811" cy="9.5" r="1.5" fill="black"></circle>
+                          <circle cx="5.73583" cy="13.4434" r="1.5" fill="black"></circle>
+                          <circle cx="9.85851" cy="13.4434" r="1.5" fill="black"></circle>
+                          <circle cx="1.61321" cy="17.3868" r="1.5" fill="black"></circle>
+                          <circle cx="5.73583" cy="17.3868" r="1.5" fill="black"></circle>
+                        </svg>
+                      </span>
+                    </button>
                 </div>
-                
-                <div class="hero-platforms anim-in d4">
-                    <span class="platform-label">COMPATIBLE WITH</span>
-                    <div class="platform-icons">
-                        <svg class="p-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
-                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.21.67-2.93 1.49-.62.69-1.16 1.84-1.01 2.96 1.12.09 2.27-.56 2.95-1.39z"/>
-                        </svg>
-                        <svg class="p-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
-                            <path d="M17.5 10.5C17.5 7.46 15.04 5 12 5S6.5 7.46 6.5 10.5h11zm-8.8-3c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8zm6.6 0c.44 0 .8.36.8.8s-.36.8-.8.8-.8-.36-.8-.8.36-.8.8-.8zm.7-4.3c.33-.28.37-.77.09-1.1-.28-.33-.77-.37-1.1-.09l-2 1.7C12.54 3.73 12.28 3.7 12 3.7c-.28 0-.54.03-.89.11l-2-1.7c-.33-.28-.82-.24-1.1.09-.28.33-.24.82.09 1.1l1.6 1.36C7.57 6.13 6.18 8.16 6.02 10.5h11.96c-.16-2.34-1.55-4.37-3.68-5.84l1.6-1.36zM6 12c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2s2-.9 2-2v-5c0-1.1-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2v5c0 1.1.9 2 2 2s2-.9 2-2v-5c0-1.1-.9-2-2-2zm-8.5 0c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5zm5 0c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5z"/>
-                        </svg>
-                        <svg class="p-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;">
-                            <path d="M0 3.449L9.75 2.1v9.45H0V3.449zM0 12.45h9.75v9.45L0 20.551v-8.102zM10.95 1.95L24 0v11.55H10.95V1.95zM10.95 12.45H24v11.55l-13.05-1.95v-9.6z"/>
-                        </svg>
-                        <span class="platform-text">PWA</span>
+
+                <!-- Social Proof Strip -->
+                <div class="hero-proof anim-in d4">
+                    <div class="hero-proof-item">
+                        <strong>5+</strong>
+                        <span>Platforms</span>
+                    </div>
+                    <div class="hero-proof-divider"></div>
+                    <div class="hero-proof-item">
+                        <strong>0</strong>
+                        <span>Data Collected</span>
+                    </div>
+                    <div class="hero-proof-divider"></div>
+                    <div class="hero-proof-item">
+                        <strong>∞</strong>
+                        <span>Streak Potential</span>
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Phone Mockup with Orbital Ring -->
             <div class="hero-visual anim-in d2">
-                <!-- Floating Glassmorphic Badges -->
-                <div class="floating-badge badge-left">
-                    <div class="badge-icon">🔒</div>
-                    <div class="badge-info">
-                        <strong>100% Private</strong>
-                        <span>Local Sandbox</span>
-                    </div>
+                <div class="phone-orbit-ring"></div>
+
+                <!-- Floating Stat Pills -->
+                <div class="hero-pill pill-top-left">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B9B1E" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>100% Local</span>
                 </div>
-                <div class="floating-badge badge-right">
-                    <div class="badge-icon">🔥</div>
-                    <div class="badge-info">
-                        <strong>Streak Active</strong>
-                        <span>24 Days Habit</span>
-                    </div>
+                <div class="hero-pill pill-top-right">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <span>24-Day Streak</span>
+                </div>
+                <div class="hero-pill pill-bottom">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B9B1E" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    <span>₹12,450 Saved</span>
                 </div>
 
-                <!-- macOS style product dashboard container -->
-                <div class="hero-dashboard brutal-box">
-                    <div class="dashboard-header">
-                        <span class="window-dot dot-red"></span>
-                        <span class="window-dot dot-yellow"></span>
-                        <span class="window-dot dot-green"></span>
-                        <span class="dashboard-title">HUSTI Vault</span>
-                    </div>
-                    <div class="dashboard-content">
-                        <!-- Main Calendar Column -->
-                        <div class="dashboard-main-col">
-                            <div class="db-calendar">
-                                <div class="db-calendar-header">
-                                    <span>July 2025</span>
-                                    <span class="db-active-badge">✔ Active</span>
-                                </div>
-                                <div class="db-calendar-weekdays">
-                                    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-                                </div>
-                                <div class="db-calendar-days" id="mock-calendar"></div>
+                <div class="demo-scroller">
+                    <div class="demo-track">
+                        <!-- Duplicate set for infinite scroll -->
+                        <div class="demo-card">
+                            <div class="demo-icon">📊</div>
+                            <div class="demo-info">
+                                <strong>Visual Calendar</strong>
+                                <span>See savings at a glance</span>
                             </div>
                         </div>
-                        <!-- Stats Column -->
-                        <div class="dashboard-side-col">
-                            <div class="db-stat-card">
-                                <h5>Total Saved</h5>
-                                <strong class="db-stat-value mock-stat-value">₹12,450</strong>
+                        <div class="demo-card">
+                            <div class="demo-icon">🔒</div>
+                            <div class="demo-info">
+                                <strong>100% Offline</strong>
+                                <span>Total privacy, no cloud</span>
                             </div>
-                            <div class="db-stat-card streak">
-                                <h5>Habit Index</h5>
-                                <strong class="db-stat-value">96% 🔥</strong>
+                        </div>
+                        <div class="demo-card">
+                            <div class="demo-icon">🔥</div>
+                            <div class="demo-info">
+                                <strong>Streak System</strong>
+                                <span>Build habits that stick</span>
                             </div>
-                            <div class="db-stat-card">
-                                <h5>Active Streak</h5>
-                                <strong class="db-stat-value" style="display: flex; align-items: center; gap: 4px;">
-                                    14d
-                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; color: #ff4d6d; display: inline-block; vertical-align: middle;"><path d="M12 2c0 0-4 4.5-4 8.5s4 7.5 4 7.5 4-3.5 4-7.5S12 2 12 2zm0 12c-1.1 0-2-.9-2-2s2-4 2-4 2 2.9 2 4c0 1.1-.9 2-2 2z"/></svg>
-                                </strong>
+                        </div>
+                        <div class="demo-card">
+                            <div class="demo-icon">🎯</div>
+                            <div class="demo-info">
+                                <strong>Goal Tracking</strong>
+                                <span>Hit targets faster</span>
+                            </div>
+                        </div>
+                        <!-- Duplicates -->
+                        <div class="demo-card">
+                            <div class="demo-icon">📊</div>
+                            <div class="demo-info">
+                                <strong>Visual Calendar</strong>
+                                <span>See savings at a glance</span>
+                            </div>
+                        </div>
+                        <div class="demo-card">
+                            <div class="demo-icon">🔒</div>
+                            <div class="demo-info">
+                                <strong>100% Offline</strong>
+                                <span>Total privacy, no cloud</span>
+                            </div>
+                        </div>
+                        <div class="demo-card">
+                            <div class="demo-icon">🔥</div>
+                            <div class="demo-info">
+                                <strong>Streak System</strong>
+                                <span>Build habits that stick</span>
+                            </div>
+                        </div>
+                        <div class="demo-card">
+                            <div class="demo-icon">🎯</div>
+                            <div class="demo-info">
+                                <strong>Goal Tracking</strong>
+                                <span>Hit targets faster</span>
                             </div>
                         </div>
                     </div>
