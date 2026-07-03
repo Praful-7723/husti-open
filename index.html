@@ -46,11 +46,7 @@
 
         <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-chips anim-in">
-                    <span class="hero-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Private</span>
-                    <span class="hero-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg> Offline</span>
-                    <span class="hero-chip hero-chip-accent"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Free</span>
-                </div>
+
 
                 <h1 class="hero-title anim-in d1">
                     Build Your<br/>
@@ -113,82 +109,57 @@
             </div>
 
             <!-- Phone Mockup with Orbital Ring -->
+            <!-- Wheel Selector Component -->
             <div class="hero-visual anim-in d2">
-                <div class="phone-orbit-ring"></div>
+                <div class="wheel-selector-container">
+                    <div class="wheel-selector">
+                      <div class="hint-pop">TAP TO SPIN</div>
+                      <div class="radio-input">
+                        <label for="value-2" class="next-trigger" id="trigger-for-1"></label>
+                        <label for="value-3" class="next-trigger" id="trigger-for-2"></label>
+                        <label for="value-1" class="next-trigger" id="trigger-for-3"></label>
 
-                <!-- Floating Stat Pills -->
-                <div class="hero-pill pill-top-left">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B9B1E" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>100% Local</span>
-                </div>
-                <div class="hero-pill pill-top-right">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    <span>24-Day Streak</span>
-                </div>
-                <div class="hero-pill pill-bottom">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B9B1E" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    <span>₹12,450 Saved</span>
-                </div>
+                        <div class="glass-overlay"></div>
 
-                <div class="demo-scroller">
-                    <div class="demo-track">
-                        <!-- Duplicate set for infinite scroll -->
-                        <div class="demo-card">
-                            <div class="demo-icon">📊</div>
-                            <div class="demo-info">
-                                <strong>Visual Calendar</strong>
-                                <span>See savings at a glance</span>
-                            </div>
+                        <input
+                          value="value-1"
+                          name="value-radio"
+                          id="value-1"
+                          type="radio"
+                          checked=""
+                        />
+                        <label class="wheel-label" for="value-1" style="--angle: -30deg">
+                          <span class="num">01</span>
+                          <span class="label">PRIVATE</span>
+                        </label>
+
+                        <input value="value-2" name="value-radio" id="value-2" type="radio" />
+                        <label class="wheel-label" for="value-2" style="--angle: 0deg">
+                          <span class="num">02</span>
+                          <span class="label">OFFLINE</span>
+                        </label>
+
+                        <input value="value-3" name="value-radio" id="value-3" type="radio" />
+                        <label class="wheel-label" for="value-3" style="--angle: 30deg">
+                          <span class="num">03</span>
+                          <span class="label">FREE</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- Dynamic CSS-only descriptions -->
+                    <div class="wheel-desc-container">
+                        <div class="wheel-desc desc-private">
+                            <h4>🔒 100% Private</h4>
+                            <p>No email. No account. Your financial data is sandboxed on your device and never sent to external servers.</p>
                         </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🔒</div>
-                            <div class="demo-info">
-                                <strong>100% Offline</strong>
-                                <span>Total privacy, no cloud</span>
-                            </div>
+                        <div class="wheel-desc desc-offline">
+                            <h4>✈️ Works Offline</h4>
+                            <p>Track your saving habits anytime, anywhere. Full PWA support with instant offline loading.</p>
                         </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🔥</div>
-                            <div class="demo-info">
-                                <strong>Streak System</strong>
-                                <span>Build habits that stick</span>
-                            </div>
-                        </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🎯</div>
-                            <div class="demo-info">
-                                <strong>Goal Tracking</strong>
-                                <span>Hit targets faster</span>
-                            </div>
-                        </div>
-                        <!-- Duplicates -->
-                        <div class="demo-card">
-                            <div class="demo-icon">📊</div>
-                            <div class="demo-info">
-                                <strong>Visual Calendar</strong>
-                                <span>See savings at a glance</span>
-                            </div>
-                        </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🔒</div>
-                            <div class="demo-info">
-                                <strong>100% Offline</strong>
-                                <span>Total privacy, no cloud</span>
-                            </div>
-                        </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🔥</div>
-                            <div class="demo-info">
-                                <strong>Streak System</strong>
-                                <span>Build habits that stick</span>
-                            </div>
-                        </div>
-                        <div class="demo-card">
-                            <div class="demo-icon">🎯</div>
-                            <div class="demo-info">
-                                <strong>Goal Tracking</strong>
-                                <span>Hit targets faster</span>
-                            </div>
+                        <div class="wheel-desc desc-free">
+                            <h4>💸 Zero Subscriptions</h4>
+                            <p>Free open-source software. No monthly paywall locks, no hidden telemetry or trackers.</p>
                         </div>
                     </div>
                 </div>
